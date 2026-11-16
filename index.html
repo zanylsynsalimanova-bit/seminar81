@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шығармашылықтың жаңа кеңістігі — қалалық семинар</title>
+<meta name="description" content="«Шығармашылықтың жаңа кеңістігі: өнер, дизайн және цифрлық технологиялар сабақтастығы» қалалық семинары. 21.10.2026, «№81 жалпы білім беретін орта мектебі» КММ.">
+<meta name="theme-color" content="#F5F0E9">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+(function(){var d=document.documentElement,rm=matchMedia('(prefers-reduced-motion: reduce)').matches,gl=false;
+try{var c=document.createElement('canvas');gl=!!(c.getContext('webgl2')||c.getContext('webgl'))}catch(e){}
+if(rm)d.classList.add('rm');if(!rm&&gl&&innerWidth>=900&&!/[?&]static/.test(location.search))d.classList.add('deep');})();
+</script>
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+<a class="skip" href="#seminar">Негізгі мазмұнға өту</a>
+
+<header class="top">
+  <a class="brand" href="#basty" aria-label="Басты бет">
+    <svg viewBox="0 0 24 28" aria-hidden="true"><path d="M2 27V12a10 10 0 0 1 20 0v15h-5V12a5 5 0 0 0-10 0v15z"/></svg>
+    <span>Шығармашылық кеңістігі</span>
+  </a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Мәзір</button>
+  <nav id="menu" aria-label="Негізгі мәзір">
+    <a href="#basty" data-nav="basty">Басты бет</a>
+    <a href="#seminar" data-nav="seminar">Семинар туралы</a>
+    <a href="#sheberlik" data-nav="sheberlik">Шеберлік сабақтары</a>
+    <a href="#bagdarlama" data-nav="bagdarlama">Бағдарлама</a>
+  </nav>
+</header>
+
+<canvas id="scene" aria-hidden="true"></canvas>
+
+<main>
+<!-- 1. ВХОД В ГАЛЕРЕЮ -->
+<section id="basty" class="hero">
+  <div class="hero-text">
+    <p class="kicker">Қалалық семинар</p>
+    <h1>Шығармашылықтың <em>жаңа</em> кеңістігі</h1>
+    <p class="sub">Өнер, дизайн және цифрлық технологиялар сабақтастығы</p>
+    <dl class="facts">
+      <dt>Күні</dt><dd class="d">21.10.2026</dd>
+      <dt>Өтетін орны</dt><dd>«№81 жалпы білім беретін орта мектебі» КММ</dd>
+      <dt>Тіркеу</dt><dd>08:30</dd>
+      <dt>Басталуы</dt><dd>09:00</dd>
+      <dt>Формат</dt><dd>офлайн</dd>
+    </dl>
+    <a class="btn" href="#bagdarlama">Бағдарламаны көру <span aria-hidden="true">→</span></a>
+  </div>
+
+  <div class="fallback-art hero-art" aria-hidden="true">
+    <svg viewBox="0 0 600 660">
+      <defs>
+        <radialGradient id="gSph" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#F1EBE3"/><stop offset="1" stop-color="#D9CEC1"/></radialGradient>
+        <linearGradient id="gFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F2EB"/><stop offset="1" stop-color="#E9DFD2"/></linearGradient>
+        <linearGradient id="gTun" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4A1424"/><stop offset=".5" stop-color="#5C1B2E"/><stop offset="1" stop-color="#3E101E"/></linearGradient>
+        <pattern id="pWood" width="40" height="12" patternUnits="userSpaceOnUse"><rect width="40" height="12" fill="#D6B78E"/><path d="M0 4q10-2 20 0t20 0M0 9q10 2 20 0t20 0" stroke="#C29E72" stroke-width="1" fill="none" opacity=".7"/></pattern>
+        <filter id="fBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+      </defs>
+      <rect width="600" height="660" fill="#EDE6DC"/>
+      <rect y="560" width="600" height="100" fill="#E5DBCD"/>
+      <g data-depth=".03">
+        <path d="M225 545V285a75 75 0 0 1 150 0v260z" fill="url(#gFar)"/>
+        <path d="M268 545V330a32 32 0 0 1 64 0v215" fill="none" stroke="#C9A5AA" stroke-width="7"/>
+        <path d="M287 545V360a13 13 0 0 1 26 0v185" fill="none" stroke="#B79B6C" stroke-width="3"/>
+        <path d="M225 545h150l-40-14h-70z" fill="#E2D7C8"/>
+      </g>
+      <g data-depth=".06">
+        <path fill-rule="evenodd" fill="url(#gTun)" d="M195 560V270a105 105 0 0 1 210 0v290zM225 545V285a75 75 0 0 1 150 0v260z"/>
+        <path d="M195 560h210l-30-15H225z" fill="#7A2A40"/>
+        <path fill-rule="evenodd" fill="#6B2035" d="M160 560V270a140 140 0 0 1 280 0v290zM195 560V270a105 105 0 0 1 210 0v290z"/>
+        <path d="M440 270v290" stroke="#561A2B" stroke-width="10"/>
+      </g>
+      <g data-depth=".09" fill="none" stroke="#B79B6C" stroke-width="3" stroke-linecap="round">
+        <path d="M520 205C520 168 556 158 567 177c9 15-4 30-17 23-9-5-6-17 4-15"/>
+        <path d="M520 205C520 168 484 158 473 177c-9 15 4 30 17 23 9-5 6-17-4-15"/>
+        <path d="M520 205v34m-10 10 10-10 10 10-10 10z"/>
+      </g>
+      <g data-depth=".14">
+        <ellipse cx="80" cy="640" rx="70" ry="10" fill="#B9A894" opacity=".45" filter="url(#fBlur)"/>
+        <g transform="rotate(-6 95 640)">
+          <rect x="40" y="350" width="110" height="290" fill="url(#pWood)"/>
+          <rect x="150" y="350" width="8" height="290" fill="#B8956A"/>
+          <g fill="#EDE6DC">
+            <path d="M68 372l14 22-14 22-14-22zM122 372l14 22-14 22-14-22zM95 414l14 22-14 22-14-22zM68 456l14 22-14 22-14-22zM122 456l14 22-14 22-14-22zM95 498l14 22-14 22-14-22zM68 540l14 22-14 22-14-22zM122 540l14 22-14 22-14-22zM95 582l14 22-14 22-14-22z"/>
+          </g>
+        </g>
+      </g>
+      <g data-depth=".18">
+        <ellipse cx="505" cy="640" rx="70" ry="12" fill="#B9A894" opacity=".5" filter="url(#fBlur)"/>
+        <rect x="455" y="460" width="80" height="182" fill="#F7F3EE"/>
+        <rect x="517" y="460" width="18" height="182" fill="#E3DACF"/>
+        <rect x="451" y="452" width="88" height="10" fill="#FBF8F4"/>
+        <circle cx="497" cy="410" r="43" fill="url(#gSph)"/>
+        <ellipse cx="408" cy="652" rx="46" ry="8" fill="#B9A894" opacity=".5" filter="url(#fBlur)"/>
+        <path d="M368 652a40 38 0 0 1 80 0z" fill="url(#gSph)"/>
+      </g>
+    </svg>
+  </div>
+
+  <a class="scroll-hint" href="#seminar"><i aria-hidden="true"></i>Төмен айналдырыңыз</a>
+</section>
+
+<div class="passage" aria-hidden="true"></div>
+
+<!-- 2. СЕМИНАР ТУРАЛЫ -->
+<section id="seminar" class="hall about" aria-labelledby="h-seminar">
+  <div class="panel">
+    <p class="sec-head"><b>01</b> Мақсаты</p>
+    <h2 id="h-seminar">Семинар туралы</h2>
+    <p class="goal">Өнер пәндерін оқытуда заманауи педагогикалық әдістерді, шығармашылық тапсырмаларды және цифрлық технологияларды тиімді қолдану арқылы білім алушылардың шығармашылық қабілеттерін дамыту жолдарын көрсету.</p>
+  </div>
+  <div class="fallback-art about-art" aria-hidden="true">
+    <svg viewBox="0 0 300 440">
+      <defs>
+        <linearGradient id="gVase" x1="0" x2="1"><stop offset="0" stop-color="#DCD2C6"/><stop offset=".38" stop-color="#FFFDF9"/><stop offset="1" stop-color="#D6CBBE"/></linearGradient>
+        <linearGradient id="gPed" x1="0" x2="1"><stop offset="0" stop-color="#F3EEE7"/><stop offset=".75" stop-color="#F3EEE7"/><stop offset=".76" stop-color="#E1D8CC"/></linearGradient>
+      </defs>
+      <ellipse cx="150" cy="430" rx="110" ry="9" fill="#B9A894" opacity=".35"/>
+      <g data-depth=".08">
+        <rect x="88" y="300" width="124" height="130" fill="url(#gPed)"/>
+        <rect x="82" y="292" width="136" height="10" fill="#FBF8F4"/>
+        <path d="M122 40h56c-2 26-10 36-8 52 44 30 58 92 40 144-12 32-30 46-34 56h-52c-4-10-22-24-34-56-18-52-4-114 40-144 2-16-6-26-8-52z" fill="url(#gVase)"/>
+        <path d="M116 40h68" stroke="#E6DED3" stroke-width="6" stroke-linecap="round"/>
+        <path d="M96 170c36 14 72 14 108 0" stroke="#B79B6C" stroke-width="2" fill="none"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<div class="passage" aria-hidden="true"></div>
+
+<!-- 3. ШЕБЕРЛІК САБАҚТАРЫ -->
+<section id="sheberlik" class="hall work" aria-labelledby="h-work">
+  <div class="panel">
+    <p class="sec-head"><b>02</b> 10:00–10:40 · үш бағыт</p>
+    <h2 id="h-work">Шеберлік сабақтары</h2>
+    <p class="lead">Практикалық бөлімдегі шеберлік сабақтары (Master class) бір уақытта үш бағытта өтеді.</p>
+
+    <article class="exhibit ex--gips">
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 320 190">
+          <defs><radialGradient id="gS2" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#EFE8DF"/><stop offset="1" stop-color="#D3C8BA"/></radialGradient></defs>
+          <path d="M10 170h300" stroke="#D9CFC2"/>
+          <ellipse cx="160" cy="172" rx="130" ry="7" fill="#C8B9A6" opacity=".35"/>
+          <path d="M50 100l40-16 40 16v66l-40 6-40-6z" fill="#F4EFE8"/><path d="M90 116v56l40-6v-66z" fill="#E1D8CC"/><path d="M50 100l40 16 40-16-40-16z" fill="#FCFAF6"/>
+          <circle cx="185" cy="128" r="40" fill="url(#gS2)"/>
+          <path d="M240 166v-52a26 10 0 0 1 52 0v52z" fill="#EAE2D8"/><ellipse cx="266" cy="114" rx="26" ry="10" fill="#FBF8F4"/>
+        </svg>
+      </div>
+      <div class="txt">
+        <p class="ex-meta">Көркем еңбек · қыздар тобы</p>
+        <h3>«ГипсArt: өнер мен шығармашылықтың үйлесімі»</h3>
+        <p class="who"><strong>Махамбетжанова Ә.Н.</strong><span>педагог сарапшы</span></p>
+      </div>
+    </article>
+
+    <article class="exhibit ex--laser">
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 320 190">
+          <defs><pattern id="pW2" width="30" height="9" patternUnits="userSpaceOnUse"><rect width="30" height="9" fill="#D6B78E"/><path d="M0 3q8-2 15 0t15 0" stroke="#C29E72" fill="none" opacity=".7"/></pattern></defs>
+          <g fill="none" stroke="#B79B6C" stroke-width="1.5">
+            <rect x="28" y="22" width="100" height="146"/>
+            <path d="M53 34l14 22-14 22-14-22zM103 34l14 22-14 22-14-22zM78 78l14 22-14 22-14-22zM53 122l14 22-14 22-14-22zM103 122l14 22-14 22-14-22z"/>
+          </g>
+          <g fill="#F5F0E9" stroke="#292326" stroke-width="1.2">
+            <rect x="50" y="31" width="6" height="6"/><rect x="64" y="53" width="6" height="6"/><rect x="50" y="75" width="6" height="6"/><rect x="36" y="53" width="6" height="6"/>
+            <rect x="75" y="119" width="6" height="6"/><rect x="89" y="97" width="6" height="6"/><rect x="25" y="19" width="6" height="6"/><rect x="125" y="165" width="6" height="6"/>
+          </g>
+          <path d="M67 56h22M89 56l-6-4m6 4-6 4" stroke="#292326" stroke-width="1" opacity=".5" fill="none"/>
+          <path d="M146 95h28m0 0-8-6m8 6-8 6" stroke="#6B2035" stroke-width="2" fill="none"/>
+          <rect x="198" y="28" width="100" height="146" fill="#B48F63"/>
+          <rect x="190" y="22" width="100" height="146" fill="url(#pW2)"/>
+          <g fill="#F5F0E9"><path d="M215 34l14 22-14 22-14-22zM265 34l14 22-14 22-14-22zM240 78l14 22-14 22-14-22zM215 122l14 22-14 22-14-22zM265 122l14 22-14 22-14-22z"/></g>
+        </svg>
+      </div>
+      <div class="txt">
+        <p class="ex-meta">Көркем еңбек · ұлдар тобы</p>
+        <h3>«Цифрлық дизайн және лазерлік кесу»</h3>
+        <p><span class="tag">CorelDRAW</span> бағдарламасында макет әзірлеп, лазерлік станокпен бұйым жасау.</p>
+        <p class="who"><strong>Куатова Б.С.</strong><span>педагог сарапшы</span></p>
+      </div>
+    </article>
+
+    <article class="exhibit ex--music">
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path d="M0 60C30 20 50 20 80 60s50 40 80 0 50-40 80 0 50 40 80 0" fill="none" stroke="#F5F0E9" stroke-width="2.5"/>
+          <path d="M0 60C25 35 55 35 80 60s55 25 80 0 55-25 80 0 55 25 80 0" fill="none" stroke="#C9A5AA" stroke-width="1.5"/>
+          <path d="M0 60C35 5 45 5 80 60s45 55 80 0 45-55 80 0 45 55 80 0" fill="none" stroke="#B79B6C" stroke-width="1" opacity=".8"/>
+        </svg>
+      </div>
+      <div class="txt">
+        <p class="ex-meta">Музыка пәні</p>
+        <h3>Музыка</h3>
+        <p>Заманауи әдіс-тәсілдерді көрсету, тиімді педагогикалық тәжірибемен бөлісу.</p>
+        <div class="who duo">
+          <p><strong>Кабакова А.Т.</strong><span>педагог модератор</span></p>
+          <p><strong>Сансызбайқызы З.</strong><span>педагог</span></p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="passage" aria-hidden="true"></div>
+
+<!-- 4. БАҒДАРЛАМА -->
+<section id="bagdarlama" class="hall prog" aria-labelledby="h-prog">
+  <div class="panel">
+    <p class="sec-head"><b>03</b> 21.10.2026</p>
+    <h2 id="h-prog">Бағдарлама</h2>
+    <ol class="timeline">
+      <li class="slot"><p class="time">08:30</p><div><h3>Тіркеу</h3></div></li>
+      <li class="part">I. Теориялық бөлім</li>
+      <li class="slot"><p class="time">09:00–09:30</p><div>
+        <h3>Семинардың ашылуы</h3>
+        <p>«Білім беру жүйесіндегі инновациялар: жасанды интеллект және мектепті дамыту перспективалары»<br><span class="role">КММ директоры Кисикова А.М.</span></p>
+        <p>«Жасанды интеллект дәуіріндегі әдістемелік жұмысты ұйымдастырудың тиімді стратегиялары»<br><span class="role">КММ әдіскері</span></p>
+      </div></li>
+      <li class="slot"><p class="time">09:35–09:45</p><div>
+        <h3>«Жақсы көңіл-күй жан шуағы» тренингі</h3>
+        <p><span class="role">Мектеп психологы Умирбаева Г.С.</span></p>
+      </div></li>
+      <li class="part">II. Практикалық бөлім</li>
+      <li class="slot"><p class="time">10:00–10:40</p><div>
+        <h3>Шеберлік сабақтары <span class="role">(Master class) · қатар өтеді</span></h3>
+        <div class="tracks">
+          <div class="track"><p class="ex-meta">Көркем еңбек · қыздар тобы</p><p>«ГипсArt: өнер мен шығармашылықтың үйлесімі»</p><p class="role">Махамбетжанова Ә.Н., педагог сарапшы</p></div>
+          <div class="track"><p class="ex-meta">Көркем еңбек · ұлдар тобы</p><p>«Цифрлық дизайн және лазерлік кесу» – CorelDRAW бағдарламасында макет әзірлеп, лазерлік станокпен бұйым жасау</p><p class="role">Куатова Б.С., педагог сарапшы</p></div>
+          <div class="track"><p class="ex-meta">Музыка пәні</p><p>Заманауи әдіс-тәсілдерді көрсету, тиімді педагогикалық тәжірибемен бөлісу</p><p class="role">Кабакова А.Т., педагог модератор; Сансызбайқызы З., педагог</p></div>
+        </div>
+      </div></li>
+      <li class="slot"><p class="time">10:45–11:05</p><div>
+        <h3>Заманауи әдіс-тәсілдер және педагогикалық тәжірибе</h3>
+        <p>Көркем еңбек пәні бойынша заманауи әдіс-тәсілдерді көрсету, тиімді педагогикалық тәжірибемен бөлісу<br><span class="role">Көркем еңбек пәнінің мұғалімі Изенбаева К.Е., педагог-зерттеуші</span></p>
+      </div></li>
+      <li class="slot"><p class="time">11:10–11:40</p><div>
+        <h3>Рефлексия</h3>
+        <p><span class="role">Мырзагалиева М.М., педагог сарапшы; Нысанова М.А., педагог</span></p>
+      </div></li>
+      <li class="slot"><p class="time">11:45–12:10</p><div>
+        <h3>Семинардың жабылуы</h3>
+        <p><span class="role">«BILIM QAZYNA» КММ әдіскері</span></p>
+      </div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5. КҮТІЛЕТІН НӘТИЖЕ -->
+<section id="natije" class="hall result" aria-labelledby="h-res">
+  <div class="panel">
+    <p class="sec-head"><b>04</b> Қорытынды</p>
+    <h2 id="h-res">Күтілетін нәтиже</h2>
+    <p class="goal">Педагогтер тәжірибе алмасады, тиімді әдіс-тәсілдерді меңгереді, шығармашылық идеяларын ортаға салады және кәсіби ынтымақтастықты нығайтады.</p>
+    <ul class="points">
+      <li><b>01</b>Тәжірибе алмасу</li>
+      <li><b>02</b>Тиімді әдіс-тәсілдерді меңгеру</li>
+      <li><b>03</b>Шығармашылық идеялар</li>
+      <li><b>04</b>Кәсіби ынтымақтастық</li>
+    </ul>
+  </div>
+  <div class="fallback-art result-art" aria-hidden="true">
+    <svg viewBox="0 0 340 340">
+      <defs><radialGradient id="gS3" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#EFE8DF"/><stop offset="1" stop-color="#D3C8BA"/></radialGradient></defs>
+      <ellipse cx="170" cy="300" rx="130" ry="22" fill="#E6DDD1"/><path d="M40 300v14a130 22 0 0 0 260 0v-14" fill="#DDD3C6"/>
+      <g data-depth=".06"><circle cx="170" cy="200" r="78" fill="none" stroke="#C9A781" stroke-width="9"/><circle cx="170" cy="200" r="78" fill="none" stroke="#A9835A" stroke-width="2" stroke-dasharray="3 9"/></g>
+      <circle cx="140" cy="250" r="46" fill="url(#gS3)"/>
+      <g data-depth=".1" fill="none"><path d="M40 90c40-40 70-40 110 0s70 40 110 0" stroke="#6B2035" stroke-width="2.5"/><path d="M60 98c35-26 60-26 90 0s65 26 100 0" stroke="#C9A5AA" stroke-width="1.5"/></g>
+    </svg>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p>«Шығармашылықтың жаңа кеңістігі: өнер, дизайн және цифрлық технологиялар сабақтастығы» қалалық семинары</p>
+  <p>21.10.2026 · «№81 жалпы білім беретін орта мектебі» КММ · Сайт семинар бағдарламасы негізінде жасалды</p>
+  <a href="#basty">Жоғары ↑</a>
+</footer>
+
+<script>
+(function(){
+  var d=document.documentElement,btn=document.querySelector('.menu-btn'),menu=document.getElementById('menu');
+  function close(){d.classList.remove('menu-open');btn.setAttribute('aria-expanded','false')}
+  btn.addEventListener('click',function(){var o=d.classList.toggle('menu-open');btn.setAttribute('aria-expanded',o?'true':'false')});
+  menu.addEventListener('click',function(e){if(e.target.closest('a'))close()});
+  addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  // active nav
+  var links={};document.querySelectorAll('[data-nav]').forEach(function(a){links[a.dataset.nav]=a});
+  var map={basty:'basty',seminar:'seminar',sheberlik:'sheberlik',bagdarlama:'bagdarlama',natije:'bagdarlama'};
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var k=map[e.target.id];
+    Object.keys(links).forEach(function(n){var on=n===k;links[n].classList.toggle('is-active',on);on?links[n].setAttribute('aria-current','true'):links[n].removeAttribute('aria-current')})})},{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('main > section').forEach(function(s){io.observe(s)});
+  // light parallax for flat (mobile / fallback) art
+  var layers=[].slice.call(document.querySelectorAll('[data-depth]')),tick=false;
+  function par(){tick=false;if(d.classList.contains('rm')||(d.classList.contains('deep')&&innerWidth>=900))return;var vh=innerHeight;
+    layers.forEach(function(g){var svg=g.ownerSVGElement,r=svg.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;
+      g.style.transform='translateY('+(-(r.top+r.height/2-vh/2)*parseFloat(g.dataset.depth)).toFixed(1)+'px)'})}
+  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(par)}},{passive:true});par();
+  // 3D scene (desktop only)
+  if(d.classList.contains('deep')){import('./scene.js?v=7').catch(function(err){console.warn('3D off:',err);d.classList.remove('deep');par()})}
+})();
+</script>
+</body>
+</html>
