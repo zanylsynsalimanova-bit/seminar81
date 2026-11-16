@@ -50,16 +50,35 @@
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${IW} ${IH}" preserveAspectRatio="none"><defs><filter id="b" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter><mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="${IW}" height="${IH}"><rect width="${IW}" height="${IH}" fill="#fff"/><rect x="${x0}" y="${y0}" width="${w}" height="${y1 - y0}" fill="#000"/><path d="M${x0 + 6} ${y1 - 4}H${x1 - 6}L${x1 + w * 0.22} ${fy}H${x0 - w * 0.22}Z" fill="#000" filter="url(#b)"/></mask></defs><rect width="${IW}" height="${IH}" mask="url(#m)"/></svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   }
+  // ---------- portraits: separate transparent PNGs standing in the niches ----------
+  // Fill ONLY with confirmed matches (stop id → file in people/). Never guessed from faces.
+  const PEOPLE = {
+    // '03': 'p1',
+  };
+  if (/[?&]demo/.test(location.search)) { // layout preview only: order of files, not identities
+    ['03', '05', '06', '07', '08', '10'].forEach((id, n) => { PEOPLE[id] = 'p' + (n + 1); });
+  }
+  function addPerson(lay, n, file) {
+    const nh = n[3] - n[1], ph = nh * 0.68, feet = n[3] - nh * 0.012, cx = (n[0] + n[2]) / 2;
+    const sh = document.createElement('div'); sh.className = 'contact';
+    Object.assign(sh.style, { left: (cx / IW * 100) + '%', top: (feet / IH * 100) + '%', width: (ph * 0.36 / IW * 100) + '%', height: (ph * 0.045 / IH * 100) + '%' });
+    const im = document.createElement('img'); im.className = 'person'; im.alt = ''; im.src = `people/${file}.png`;
+    Object.assign(im.style, { left: (cx / IW * 100) + '%', top: ((feet - ph) / IH * 100) + '%', height: (ph / IH * 100) + '%' });
+    lay.append(sh, im);
+  }
   const L = S.map((s, i) => {
     const mk = (cls) => { const d = document.createElement('div'); d.className = 'lay ' + cls; const im = document.createElement('img'); im.alt = ''; im.decoding = 'async'; d.appendChild(im); stage.appendChild(d); return d; };
     const bg = mk('bg'), fr = s.door ? mk('fr') : null;
     if (fr) { const m = holeMask(s.door); fr.style.webkitMaskImage = m; fr.style.maskImage = m; }
+    const who = PEOPLE[s.id];
+    if (who && s.niche) [bg, fr].forEach((lay) => lay && addPerson(lay, s.niche, who));
     const D = s.door ? [(s.door[0] + s.door[2]) / 2, clamp(470, s.door[1] + 40, s.door[3] - 60)] : [IW / 2, IH * 0.48];
     return { bg, fr, D, loaded: false };
   });
   function load(i) {
     if (i < 0 || i >= N || L[i].loaded) return;
     L[i].loaded = true;
+    L[i].bg.firstChild.addEventListener('load', () => { if (typeof toneStop === 'function' && mode === 'walk') toneStop(i); }, { once: true });
     [L[i].bg, L[i].fr].forEach((d) => { if (d) d.firstChild.src = src(i); });
   }
   const ready = (i) => { const im = L[i].bg.firstChild; return im.complete && im.naturalWidth > 0; };
@@ -134,7 +153,56 @@
       const zt = b.oy + z[1] * b.k, zh = (z[3] - z[1]) * b.k, h = el.offsetHeight;
       el.style.top = Math.max(76, zt + Math.max(0, (zh - h) / 2)) + 'px';
     });
+    toneAll();
   }
+
+  // ---------- per-block text tone (WCAG): sample the original pixels behind each block ----------
+  const SW = 418, SH = 235, SM = [];
+  const lin = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+  const L_INK = 0.0181, L_LIGHT = 0.947, L_IVORY = 0.874, L_BURG = 0.044;
+  const cr = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  function lumMap(i) {
+    if (SM[i]) return SM[i];
+    const im = L[i].bg.firstChild; if (!(im.complete && im.naturalWidth)) return null;
+    const c = document.createElement('canvas'); c.width = SW; c.height = SH;
+    const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(im, 0, 0, SW, SH);
+    const d = g.getImageData(0, 0, SW, SH).data, m = new Float32Array(SW * SH);
+    for (let p = 0; p < m.length; p++) m[p] = 0.2126 * lin(d[p * 4]) + 0.7152 * lin(d[p * 4 + 1]) + 0.0722 * lin(d[p * 4 + 2]);
+    return (SM[i] = m);
+  }
+  const blocksOf = (el) => [...el.querySelectorAll(':scope > :not(ol), :scope > ol > li')];
+  function toneStop(i) {
+    const el = stops[i], blocks = blocksOf(el);
+    if (phone) { blocks.forEach((b) => { b.dataset.tone = 'ink'; b.dataset.cr = cr(L_IVORY, L_INK).toFixed(1); }); return; }
+    const m = lumMap(i); if (!m) return;
+    const f = focusOf(i), bs = base(i, f[0], f[1], false), sc = SW / IW;
+    const sr = el.getBoundingClientRect(), top0 = parseFloat(el.style.top) || sr.top, dy = sr.top - top0;
+    blocks.forEach((b) => { b.dataset.tone = ''; });
+    el.removeAttribute('data-plate'); // measure without any previous plate padding/offset
+    blocks.forEach((b) => {
+      const r = b.getBoundingClientRect();
+      const x0 = clamp(Math.floor((r.left - bs.ox) / bs.k * sc), 0, SW - 1), x1 = clamp(Math.ceil((r.right - bs.ox) / bs.k * sc), 0, SW - 1);
+      const y0 = clamp(Math.floor((r.top - dy - bs.oy) / bs.k * sc), 0, SH - 1), y1 = clamp(Math.ceil((r.bottom - dy - bs.oy) / bs.k * sc), 0, SH - 1);
+      const v = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) v.push(m[y * SW + x]);
+      if (!v.length) { b.dataset.tone = 'ink'; return; }
+      v.sort((a, c) => a - c);
+      const lo = v[Math.floor(v.length * 0.03)], hi = v[Math.floor(v.length * 0.97)], mean = v.reduce((a, c) => a + c, 0) / v.length;
+      const need = /^H[12]$/.test(b.tagName) ? 3 : 4.5;
+      const cInk = cr(lo, L_INK), cLight = cr(hi, L_LIGHT); // worst case over the area
+      let t, c;
+      if (cInk >= need && cInk >= cLight) { t = 'ink'; c = cInk; } else if (cLight >= need) { t = 'light'; c = cLight; }
+      else if (mean > 0.12) { t = 'plate-ivory'; c = cr(L_IVORY, L_INK); } else { t = 'plate-burg'; c = cr(L_BURG, L_LIGHT); }
+      b.dataset.tone = t; b.dataset.cr = c.toFixed(1);
+    });
+    // several plates in one stop look patchy → one calm local plate behind the whole text block
+    const plates = blocks.filter((b) => b.dataset.tone.startsWith('plate'));
+    if (plates.length >= 2) {
+      const burg = plates.filter((b) => b.dataset.tone === 'plate-burg').length > plates.length / 2;
+      el.dataset.plate = burg ? 'burg' : 'ivory';
+      blocks.forEach((b) => { b.dataset.tone = burg ? 'light' : 'ink'; b.dataset.cr = (burg ? cr(L_BURG, L_LIGHT) : cr(L_IVORY, L_INK)).toFixed(1); });
+    }
+  }
+  const toneAll = () => stops.forEach((_, i) => toneStop(i));
 
   // ---------- check / compare modes ----------
   if (mode === 'check' || mode === 'compare') {
@@ -228,4 +296,16 @@
     render(sy);
   })();
   window.__render = (y) => { sy = y; render(y); };
+  // contrast audit for all stops (dev): tone + worst-case contrast of every text block
+  window.__audit = async () => {
+    for (let i = 0; i < N; i++) load(i);
+    if (document.fonts) await document.fonts.ready;
+    placeText();
+    await Promise.all(L.map((l) => { const im = l.bg.firstChild; return im.complete ? 0 : new Promise((r) => { im.onload = im.onerror = r; setTimeout(r, 15000); }); }));
+    toneAll();
+    return stops.map((el, i) => {
+      const bl = blocksOf(el), crs = bl.map((b) => +b.dataset.cr || 0);
+      return `${S[i].id}: min ${Math.min(...crs).toFixed(1)} · ` + bl.map((b) => (b.className || b.tagName).split(' ')[0] + '=' + b.dataset.tone).join(', ');
+    }).join('\n');
+  };
 })();
