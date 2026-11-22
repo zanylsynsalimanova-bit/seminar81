@@ -22,7 +22,6 @@
     { id: '09', door: [0, 200, 200, 700], zone: [225, 150, 590, 440], niche: [1244, 170, 1496, 720], fig: { x: 1370, y: 726, h: 389, sx: 0.4, ca: 0.26 }, mS: 900, mN: 1200 },
     { id: '10', door: [470, 240, 718, 690], zone: [840, 110, 1300, 600], niche: [68, 240, 290, 700], fig: { x: 178, y: 706, h: 327, sx: 0.75, ca: 0.24 }, mS: 620, mN: 440 },
     { id: '11', door: [410, 230, 660, 650], zone: [30, 120, 420, 660], niche: [1300, 220, 1530, 700], fig: { x: 1414, y: 706, h: 342, sx: 0.3, ca: 0.3 }, mS: 1150, mN: 1250 },
-    { id: '12', door: [1210, 290, 1530, 740], zone: [560, 320, 1000, 560], niche: [64, 280, 244, 760], fig: { x: 154, y: 766, h: 342, sx: 0.4, ca: 0.26 }, mS: 1200, mN: 380 },
     { id: '13', door: [1370, 230, 1610, 700], zone: [170, 110, 1300, 690], mS: 1240 },
     { id: '14', door: [590, 225, 1110, 690], zone: [40, 130, 560, 640], niche: [1344, 140, 1638, 680], fig: { x: 1490, y: 686, h: 383, sx: -0.35, ca: 0.28 }, mS: 860, mN: 1250 },
     { id: '15', zone: [40, 120, 640, 700], mS: 1030 },
@@ -62,10 +61,10 @@
   // ---------- portraits: separate transparent PNGs standing in the niches ----------
   // Fill ONLY with confirmed matches (stop id → file in people/). Never guessed from faces.
   // confirmed by the user (file names in Desktop\Балжан апай\учителя, 2026-11-17)
-  const PEOPLE = { '06': 'makhambetzhanova', '07': 'kuatova', '08': 'kabakova', '09': 'dorzhan', '10': 'izenbaeva', '11': 'myrzagalieva', '03': 'kisikova', '12': 'nysanova' };
+  const PEOPLE = { '06': 'makhambetzhanova', '07': 'kuatova', '08': 'kabakova', '09': 'dorzhan', '10': 'izenbaeva', '11': 'myrzagalieva', '03': 'kisikova' };
   // second figure sharing a niche: file + x shift (image px)
-  const EXTRA = { '10': [{ f: 'sansyzbaikyzy', dx: 62 }] };
-  const FIRST_DX = { '10': -58 };
+  const EXTRA = { '10': [{ f: 'sansyzbaikyzy', dx: 62 }], '11': [{ f: 'nysanova', dx: 58 }] };
+  const FIRST_DX = { '10': -58, '11': -58 };
   function addPerson(lay, fg, file) {
     const px = (v) => (v / IW * 100) + '%', py = (v) => (v / IH * 100) + '%';
     // the figure box is a square of side h (lay-%): everything inside scales with the picture
@@ -331,7 +330,7 @@
 
   const countEl = document.querySelector('.count b'), prev = document.querySelector('.prev'), next = document.querySelector('.next'), hint = document.querySelector('.hint');
   const navLinks = [...document.querySelectorAll('#mainnav a')];
-  const sections = [0, 2, 5, 12, 14];
+  const sections = [0, 2, 5, 11, 13];
   let current = -1;
   // scroll reminder: on the first room, and again whenever the visitor has not moved for a few seconds
   let firstHint = true, lastMove = performance.now();
@@ -364,7 +363,7 @@
     });
     const c = p < 0.6 ? k : k + 1;
     if (c !== current) {
-      current = c; countEl.textContent = S[c].id;
+      current = c; countEl.textContent = String(c + 1).padStart(2, '0');
       prev.disabled = c === 0; next.disabled = c === N - 1;
       setHead(c);
       let sec = 0; sections.forEach((s, j) => { if (c >= s) sec = j; });

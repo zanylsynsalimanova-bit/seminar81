@@ -61,6 +61,9 @@ h2{font-size:clamp(28px,calc(44px*var(--k)),48px)}
 .facts dd{margin:0;font:500 clamp(17px,calc(22px*var(--k)),22px)/1 var(--serif);letter-spacing:.04em}
 .place{margin:0;font:500 15px/1.4 var(--sans)}
 .who{margin:14px 0 0;padding-top:12px;border-top:1px solid color-mix(in srgb,currentColor 40%,transparent);font:500 clamp(19px,calc(25px*var(--k)),26px)/1.1 var(--serif);letter-spacing:.06em;text-transform:uppercase}
+.who2{margin-top:10px;padding-top:0;border-top:0}
+.room{margin:12px 0 0;font:600 13px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.room b{font-weight:700;letter-spacing:.1em}
 .who span{display:block;margin-top:8px;font:600 12px/1.35 var(--sans);letter-spacing:.15em}
 /* programme timeline (template: vertical line with rings) */
 .tl{list-style:none;margin:6px 0 0;padding:0 0 0 22px;position:relative;columns:2;column-gap:40px}
