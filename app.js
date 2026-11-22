@@ -80,7 +80,7 @@
     // ambient occlusion: wider, soft darkening of the niche floor around the shoes
     const ao = document.createElement('div'); ao.className = 'ao';
     Object.assign(ao.style, { left: '50%', top: '99.6%', width: '52%', height: '8.5%' });
-    const im = document.createElement('img'); im.alt = ''; im.src = 'people/' + file + '.png';
+    const im = document.createElement('img'); im.alt = ''; im.src = 'people/' + file + '.png?v=2';
     g.append(cast, ao, ct, im); lay.appendChild(g);
   }
 
