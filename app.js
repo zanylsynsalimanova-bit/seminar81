@@ -92,8 +92,10 @@
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${IW} ${IH}" preserveAspectRatio="none"><defs><filter id="b" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter><mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="${IW}" height="${IH}"><rect width="${IW}" height="${IH}" fill="#fff"/><rect x="${x0}" y="${y0}" width="${w}" height="${y1 - y0}" fill="#000"/><path d="M${x0 + 6} ${y1 - 4}H${x1 - 6}L${x1 + w * 0.22} ${fy}H${x0 - w * 0.22}Z" fill="#000" filter="url(#b)"/></mask></defs><rect width="${IW}" height="${IH}" mask="url(#m)"/></svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   }
+  // pictures live in a clip box = the picture area; on phones the zoomed frame must never spill into the text area
+  const clipBox = document.createElement('div'); clipBox.id = 'clipbox'; stage.appendChild(clipBox);
   const L = S.map((s) => {
-    const mk = (cls) => { const d = document.createElement('div'); d.className = 'lay ' + cls; const im = document.createElement('img'); im.alt = ''; im.decoding = 'async'; d.appendChild(im); stage.appendChild(d); return d; };
+    const mk = (cls) => { const d = document.createElement('div'); d.className = 'lay ' + cls; const im = document.createElement('img'); im.alt = ''; im.decoding = 'async'; d.appendChild(im); clipBox.appendChild(d); return d; };
     const bg = mk('bg'), fr = s.door ? mk('fr') : null;
     if (fr) { const m = holeMask(s.door); fr.style.webkitMaskImage = m; fr.style.maskImage = m; }
     const who = PEOPLE[s.id];
@@ -316,6 +318,7 @@
     H = phoneH ? VH : phone ? Math.round(Math.min(VH * 0.5, W * 1.2)) : VH;
     root.style.setProperty('--imgH', H + 'px'); root.style.setProperty('--imgW', W + 'px');
     root.classList.toggle('ph-h', phoneH);
+    clipBox.style.width = phoneH ? W + 'px' : '100%'; clipBox.style.height = phone && !phoneH ? H + 'px' : '100%';
     SEG = Math.round(VH * 2.2);
     track.style.height = SEG * (N - 1) + VH + 'px';
     placeText();
@@ -338,6 +341,8 @@
     if (h.strong) document.body.dataset.headstrong = ''; else document.body.removeAttribute('data-headstrong');
     if (phone && S[c].wall) { stage.style.background = S[c].wall.css; fade.style.background = `linear-gradient(to ${phoneH ? 'right' : 'bottom'}, rgba(0,0,0,0), ${S[c].wall.css})`; }
     else { stage.style.background = ''; fade.style.background = 'none'; }
+    // the stage slides up while a long section is read; whatever it uncovers gets the same wall tone
+    document.body.style.background = phone && S[c].wall ? S[c].wall.css : '';
   }
 
   function render(y) {

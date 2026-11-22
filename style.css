@@ -28,6 +28,7 @@ nav a.on{color:var(--ha);border-color:var(--ha)}
 html,body{max-width:100%;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none}
 body{touch-action:pan-y}
 #stage{contain:paint;position:fixed;inset:0;overflow:hidden;background:var(--ivory);z-index:0}
+#clipbox{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;z-index:1}
 .lay{position:absolute;left:0;top:0;visibility:hidden;will-change:transform,opacity;transform-origin:0 0}
 .lay img{display:block;width:100%;height:100%;user-select:none;-webkit-user-drag:none}
 /* teacher figure: PNG cut-out standing on the floor; shadows lie on the floor plane behind the feet */
