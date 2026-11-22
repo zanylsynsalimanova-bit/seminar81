@@ -13,7 +13,7 @@
 (function(){var d=document.documentElement,q=location.search,rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 d.classList.add(/[?&]check/.test(q)?'check':/[?&]compare/.test(q)?'compare':(rm||/[?&]flat/.test(q))?'flat':'walk');})();
 </script>
-<link rel="stylesheet" href="style.css?v=65">
+<link rel="stylesheet" href="style.css?v=68">
 </head>
 <body>
 <a class="skip" href="#s01">Мазмұнға өту</a>
@@ -167,7 +167,7 @@ d.classList.add(/[?&]check/.test(q)?'check':/[?&]compare/.test(q)?'compare':(rm|
   <p class="count" aria-live="polite"><b>01</b> / 15</p>
   <button type="button" class="next" aria-label="Келесі зал">Әрі қарай →</button>
 </div>
-<p class="hint" aria-hidden="true"><i></i><span class="h-pc">Төмен айналдырыңыз</span><span class="h-ph">Төмен сырғытыңыз</span></p>
+<p class="hint" aria-hidden="true"><span class="hg h-pc"><svg viewBox="0 0 32 52" width="30" height="48"><rect x="2" y="2" width="28" height="48" rx="14" fill="none" stroke="currentColor" stroke-width="2.4"/><rect class="wheel" x="14.2" y="10" width="3.6" height="10" rx="1.8" fill="currentColor"/></svg><b>Төмен айналдырыңыз</b></span><span class="hg h-ph"><svg viewBox="0 0 48 72" width="44" height="66"><g class="finger"><rect x="15" y="30" width="18" height="40" rx="9" fill="currentColor" opacity=".92"/><circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" stroke-width="2.4" opacity=".7"/><circle cx="24" cy="24" r="6" fill="currentColor"/></g></svg><b>Төмен сырғытыңыз</b></span></p>
 <div id="tools" hidden></div>
 
 <div id="track" aria-hidden="true"></div>
