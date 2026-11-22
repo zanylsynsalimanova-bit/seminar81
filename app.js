@@ -32,7 +32,9 @@
   const mode = ['check', 'compare', 'flat'].find((m) => root.classList.contains(m)) || 'walk';
   const stops = [...document.querySelectorAll('.stop')];
   const stage = document.getElementById('stage');
-  const src = (i) => `img/${S[i].id}.jpg`;
+  // phones get a lighter picture set (img/m/, 1200 px wide) — much less to download and decode
+  const LIGHT = Math.min(innerWidth, innerHeight) < 761 && !/[?&](check|compare)/.test(location.search);
+  const src = (i) => (LIGHT ? 'img/m/' : 'img/') + S[i].id + '.jpg';
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const c01 = (v) => clamp(v, 0, 1);
   const smooth = (t) => t * t * (3 - 2 * t);
@@ -384,10 +386,15 @@
   if (q0 >= 1 && q0 <= N) { scrollTo(0, (q0 - 1) * SEG); sy = (q0 - 1) * SEG; load(q0 - 1); }
 
   render(sy);
+  let lastSy = sy, lastAt = 0;
   (function loop() {
     requestAnimationFrame(loop);
     const y = scrollY;
     if (snap) { sy = y; snap = false; } else { sy += (y - sy) * 0.15; if (Math.abs(y - sy) < 0.5) sy = y; }
+    // idle: nothing moves → don't redraw 60×/s (saves battery and CPU on phones); refresh ~2×/s for safety
+    const now = performance.now();
+    if (sy === lastSy && now - lastAt < 500) return;
+    lastSy = sy; lastAt = now;
     render(sy);
   })();
   window.__render = (y) => { sy = y; render(y); };
