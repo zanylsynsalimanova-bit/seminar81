@@ -13,7 +13,7 @@
 (function(){var d=document.documentElement,q=location.search,rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 d.classList.add(/[?&]check/.test(q)?'check':/[?&]compare/.test(q)?'compare':(rm||/[?&]flat/.test(q))?'flat':'walk');})();
 </script>
-<link rel="stylesheet" href="style.css?v=63">
+<link rel="stylesheet" href="style.css?v=65">
 </head>
 <body>
 <a class="skip" href="#s01">Мазмұнға өту</a>
@@ -167,10 +167,10 @@ d.classList.add(/[?&]check/.test(q)?'check':/[?&]compare/.test(q)?'compare':(rm|
   <p class="count" aria-live="polite"><b>01</b> / 15</p>
   <button type="button" class="next" aria-label="Келесі зал">Әрі қарай →</button>
 </div>
-<p class="hint" aria-hidden="true"><i></i>Төмен айналдырыңыз</p>
+<p class="hint" aria-hidden="true"><i></i><span class="h-pc">Төмен айналдырыңыз</span><span class="h-ph">Төмен сырғытыңыз</span></p>
 <div id="tools" hidden></div>
 
 <div id="track" aria-hidden="true"></div>
-<script src="app.js?v=68"></script>
+<script src="app.js?v=69"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-:root{
+﻿:root{
   --ivory:#F5F0E9;--burg:#6B2035;--burg-d:#4E1626;--gold:#B79B6C;--ink:#292326;--muted:#5A5054;
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,'Segoe UI',Arial,sans-serif;
   --gut:clamp(16px,4vw,64px);--k:1;
@@ -83,10 +83,11 @@ body[data-head=light] .controls,body[data-head=light] .hint{color:#FFF8F0}
 .controls button:hover{border-color:currentColor}
 .controls button:disabled{opacity:.4;pointer-events:none}
 .count{margin:0;font:600 16px/1 var(--serif);letter-spacing:.1em;color:inherit;padding:9px 4px}
-.hint{position:fixed;left:var(--gut);bottom:30px;z-index:20;margin:0;display:flex;align-items:center;gap:12px;font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink);transition:opacity .4s,color .4s}
+.hint{position:fixed;left:0;right:0;justify-content:center;pointer-events:none;bottom:76px;z-index:20;margin:0;display:flex;align-items:center;gap:12px;font:600 13px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink);transition:opacity .4s,color .4s}
 .hint i{position:relative;width:1px;height:26px;background:currentColor;opacity:.35;overflow:hidden}
 .hint i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--burg);animation:drop 2.4s ease-in-out infinite}
 @keyframes drop{to{top:100%}}
+.hint::after{content:"↓";font-size:18px;animation:nudge 1.4s ease-in-out infinite}@keyframes nudge{50%{transform:translateY(5px)}}
 
 /* check / compare modes */
 .check .top,.check .stop,.check .controls,.check .hint,.check #track,
@@ -137,6 +138,10 @@ body[data-head=light] .controls,body[data-head=light] .hint{color:#FFF8F0}
   .place{font-size:15px}
   .tl{columns:1}.tl li{margin-bottom:10px}.tl small{font-size:13.5px}
   .controls{left:16px;right:16px;bottom:14px;justify-content:space-between}
-  .hint{display:none}
+  .hint{left:0;right:0;bottom:66px;justify-content:center;font-size:12px;pointer-events:none}
 }
-@media (prefers-reduced-motion:reduce){.hint i::after{animation:none}}
+.hint .h-ph{display:none}
+@media (hover:none),(max-width:760px){.hint .h-pc{display:none}.hint .h-ph{display:inline}}
+.hint span{text-shadow:0 0 10px rgba(245,240,233,.55)}
+body[data-head=light] .hint span{text-shadow:0 0 10px rgba(30,10,14,.5)}
+@media (prefers-reduced-motion:reduce){.hint i::after,.hint::after{animation:none}}

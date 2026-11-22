@@ -333,6 +333,8 @@
   const navLinks = [...document.querySelectorAll('#mainnav a')];
   const sections = [0, 2, 5, 12, 14];
   let current = -1;
+  // scroll reminder: on the first room, and again whenever the visitor has not moved for a few seconds
+  let firstHint = true, lastMove = performance.now();
   const pos = (y) => { const s = clamp(y / SEG, 0, N - 1), k = Math.min(N - 2, Math.floor(s)); return { k, p: s - k }; };
   const curAt = (y) => { const { k, p } = pos(y); return p < 0.6 ? k : k + 1; };
   function setHead(c) {
@@ -368,7 +370,7 @@
       let sec = 0; sections.forEach((s, j) => { if (c >= s) sec = j; });
       navLinks.forEach((a, j) => a.classList.toggle('on', j === sec));
     }
-    hint.style.opacity = k === 0 && p < 0.3 ? 1 : 0;
+    firstHint = k === 0 && p < 0.3;
   }
 
   const veil = document.getElementById('veil');
@@ -398,6 +400,8 @@
     if (snap) { sy = y; snap = false; } else { sy += (y - sy) * 0.15; if (Math.abs(y - sy) < 0.5) sy = y; }
     // idle: nothing moves → don't redraw 60×/s (saves battery and CPU on phones); refresh ~2×/s for safety
     const now = performance.now();
+    if (sy !== lastSy) lastMove = now;
+    hint.style.opacity = firstHint || (now - lastMove > 6000 && current < N - 1) ? 1 : 0;
     if (sy === lastSy && now - lastAt < 500) return;
     lastSy = sy; lastAt = now;
     render(sy);
