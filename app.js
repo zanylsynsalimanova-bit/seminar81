@@ -60,7 +60,10 @@
   // ---------- portraits: separate transparent PNGs standing in the niches ----------
   // Fill ONLY with confirmed matches (stop id → file in people/). Never guessed from faces.
   // confirmed by the user (file names in Desktop\Балжан апай\учителя, 2026-11-17)
-  const PEOPLE = { '06': 'makhambetzhanova', '07': 'kuatova', '08': 'kabakova', '09': 'dorzhan', '10': 'izenbaeva', '11': 'myrzagalieva' };
+  const PEOPLE = { '06': 'makhambetzhanova', '07': 'kuatova', '08': 'kabakova', '09': 'dorzhan', '10': 'izenbaeva', '11': 'myrzagalieva', '03': 'kisikova', '12': 'nysanova' };
+  // second figure sharing a niche: file + x shift (image px)
+  const EXTRA = { '10': [{ f: 'sansyzbaikyzy', dx: 62 }] };
+  const FIRST_DX = { '10': -58 };
   function addPerson(lay, fg, file) {
     const px = (v) => (v / IW * 100) + '%', py = (v) => (v / IH * 100) + '%';
     // the figure box is a square of side h (lay-%): everything inside scales with the picture
@@ -92,7 +95,11 @@
     const bg = mk('bg'), fr = s.door ? mk('fr') : null;
     if (fr) { const m = holeMask(s.door); fr.style.webkitMaskImage = m; fr.style.maskImage = m; }
     const who = PEOPLE[s.id];
-    if (who && s.fig) [bg, fr].forEach((lay) => lay && addPerson(lay, s.fig, who));
+    if (who && s.fig) [bg, fr].forEach((lay) => {
+      if (!lay) return;
+      addPerson(lay, Object.assign({}, s.fig, { x: s.fig.x + (FIRST_DX[s.id] || 0) }), who);
+      (EXTRA[s.id] || []).forEach((e) => addPerson(lay, Object.assign({}, s.fig, { x: s.fig.x + e.dx }), e.f));
+    });
     const D = s.door ? [(s.door[0] + s.door[2]) / 2, clamp(470, s.door[1] + 40, s.door[3] - 60)] : [IW / 2, IH * 0.48];
     return { bg, fr, D, loaded: false };
   });
